@@ -14,6 +14,7 @@ import { toast } from "react-hot-toast";
 import { setRequestMeta } from "next/dist/server/request-meta";
 
 function LayoutProvider({ children }: { children: React.ReactNode }) {
+  const [isAdmin, setIsAdmin] = React.useState(false);
   const menusForAdmin = [
     {
       title: "Home",
@@ -59,6 +60,7 @@ function LayoutProvider({ children }: { children: React.ReactNode }) {
       const response = await axios.get("/api/current-user");
       if (response.data.user.isAdmin) {
         setMenuToShow(menusForAdmin);
+        setIsAdmin(true);
       } else {
         setMenuToShow(menusForUser);
       }
@@ -108,7 +110,11 @@ function LayoutProvider({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       )}
-      <div className="py-3">{children}</div>
+      <div className="py-3">
+        {!isAdmin && pathname.includes("/admin")
+          ? "You are not authorized to view this page"
+          : children}
+      </div>
     </div>
   );
 }
