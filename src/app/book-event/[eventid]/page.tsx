@@ -50,8 +50,8 @@ async function BookEventPage({ params }: Props) {
               src={image}
               alt="Picture of the event"
               width={400}
-              className="rounded-l-sm"
-              // className="object-cover rounded-l-sm"
+              // className="rounded-l-sm"
+              className="object-cover rounded-l-sm"
               // className="object-contain rounded-l-sm"
             />
           ))}
